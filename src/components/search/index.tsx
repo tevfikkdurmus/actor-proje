@@ -9,7 +9,7 @@ export default function Search() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const searchTextInput = useRef(null);
+  const searchTextInput = useRef<HTMLInputElement | null>(null);
   const [searchText, setSearchText] = useState("");
 
   const createQueryString = useCallback(
@@ -40,7 +40,9 @@ export default function Search() {
     const newQueryString = params.toString();
     router.push(newQueryString ? `${pathname}?${newQueryString}` : pathname);
 
-    searchTextInput.current.focus();
+    if (searchTextInput.current) {
+      searchTextInput.current.focus();
+    }
   };
 
   return (

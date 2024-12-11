@@ -12,7 +12,6 @@ export default async function Home({ searchParams }: { searchParams: any }) {
   const actors = await (
     await fetch(`http://localhost:5000/actors?${queryParams.toString()}`)
   ).json();
-  console.log(actors);
 
   return (
     <div className="w-full max-w-[1200px] m-auto flex flex-col items-center">

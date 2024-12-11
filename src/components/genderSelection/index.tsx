@@ -39,7 +39,7 @@ export default function GenderSelection() {
         onChange={(e) => handleGender(e.target.value)}
         name="gender"
         id="gender"
-        className="h-[90%] w-[90%] bg-slate-600 text-white"
+        className="h-[90%] w-[100%] bg-slate-600 text-white"
       >
         <option value="all">Hepsi</option>
         <option value="woman">Kadın</option>

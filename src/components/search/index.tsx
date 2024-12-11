@@ -53,7 +53,7 @@ export default function Search() {
           ref={searchTextInput}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          placeholder="Oyuncu ismi girin..."
+          placeholder="Oyuncu ismi, Film ismi girin..."
           type="text"
           className="w-full h-full pl-2"
         />

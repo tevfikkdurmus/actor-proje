@@ -34,7 +34,7 @@ export default function GenderSelection() {
   };
 
   return (
-    <div className="w-[20%] bg-slate-600 flex items-center justify-center ml-1">
+    <div className="w-[50%] bg-slate-600 flex items-center justify-center ml-1">
       <select
         onChange={(e) => handleGender(e.target.value)}
         name="gender"

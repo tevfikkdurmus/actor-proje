@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import GenderSelection from "@/components/genderSelection";
 
 export default function Search() {
   const router = useRouter();
@@ -47,7 +48,7 @@ export default function Search() {
 
   return (
     <>
-      <div className="border-2 w-[80%] h-[50px] relative">
+      <div className="border-2 sm:w-[80%] lg:w-[70%] w-[100%] h-[50px] relative">
         <input
           ref={searchTextInput}
           value={searchText}
@@ -70,12 +71,15 @@ export default function Search() {
           </div>
         )}
       </div>
-      <button
-        onClick={handlePush}
-        className="bg-slate-600 w-[19%] h-full text-white ml-[1%]"
-      >
-        Ara
-      </button>
+      <div className="lg:w-[19%] sm:w-[30%] w-[100%] flex flex-row h-[50px] sm:mt-0 mt-2">
+        <button
+          onClick={handlePush}
+          className="bg-slate-600 h-full text-white sm:ml-[1%] ml-0 w-[49%]"
+        >
+          Ara
+        </button>
+        <GenderSelection />
+      </div>
     </>
   );
 }

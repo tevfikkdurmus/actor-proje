@@ -1,6 +1,5 @@
 import ActorCard from "@/components/actorCard";
 import Search from "@/components/search";
-import GenderSelection from "@/components/genderSelection";
 
 export default async function Home({ searchParams }: { searchParams: any }) {
   const { name, gender } = await searchParams;
@@ -14,11 +13,10 @@ export default async function Home({ searchParams }: { searchParams: any }) {
 
   return (
     <div className="w-full max-w-[1200px] m-auto flex flex-col items-center">
-      <div className="w-[60%] h-[50px] flex flex-row">
+      <div className="w-[90%] lg:w-[90%] sm:h-[50px] h-auto flex flex-col sm:flex-row">
         <Search />
-        <GenderSelection />
       </div>
-      <div className="flex flex-wrap w-full">
+      <div className="flex flex-wrap w-full sm:mt-0 mt-5">
         {actors.datas.map((item: any) => (
           <ActorCard key={item.id} data={item} />
         ))}

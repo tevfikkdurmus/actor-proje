@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Page({ data }: { data: any }) {
   return (
-    <div className="w-1/2 lg:w-1/3 p-1">
+    <div className="w-full lg:w-1/3 md:w-1/2 p-1">
       <div className="flex bg-slate-300">
         <img
           src={data.actorPhoto}

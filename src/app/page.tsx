@@ -1,15 +1,18 @@
 import ActorCard from "@/components/actorCard";
 import Search from "@/components/search";
+import Pagination from "@/components/pagination";
 
 export default async function Home({ searchParams }: { searchParams: any }) {
-  const { name, gender } = await searchParams;
+  const { name, gender, page } = await searchParams;
   const queryParams = new URLSearchParams();
   if (name) queryParams.append("name", name);
   if (gender) queryParams.append("gender", gender);
+  if (page) queryParams.append("page", page);
 
   const actors = await (
     await fetch(`http://localhost:5000/actors?${queryParams.toString()}`)
   ).json();
+  console.log(actors);
 
   return (
     <div className="w-full max-w-[1200px] m-auto flex flex-col items-center">
@@ -21,6 +24,10 @@ export default async function Home({ searchParams }: { searchParams: any }) {
           <ActorCard key={item.id} data={item} />
         ))}
       </div>
+      <Pagination
+        activePagee={page ? page : 1}
+        pageCount={Math.ceil(actors.totalCount / actors.pageSize) == 1 ? 0 : Math.ceil(actors.totalCount / actors.pageSize)}
+      />
     </div>
   );
 }

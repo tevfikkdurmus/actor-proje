@@ -12,6 +12,7 @@ export default function Search() {
   const searchParams = useSearchParams();
   const searchTextInput = useRef<HTMLInputElement | null>(null);
   const [searchText, setSearchText] = useState("");
+  const [searchedText, setSearchedText] = useState("");
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -24,17 +25,16 @@ export default function Search() {
   );
 
   const handlePush = () => {
-    if (searchText == "") {
-      const params = new URLSearchParams(searchParams.toString());
-      const newQueryString = params.toString();
-      router.push(newQueryString ? `${pathname}?${newQueryString}` : pathname);
-    } else {
+    setSearchedText(searchText);
+
+    if (searchText != searchedText) {
       router.push(pathname + "?" + createQueryString("name", searchText));
     }
   };
 
   const clearSearchText = () => {
     setSearchText("");
+    setSearchedText("");
 
     const params = new URLSearchParams(searchParams.toString());
     params.delete("name");
@@ -74,7 +74,7 @@ export default function Search() {
       <div className="lg:w-[19%] sm:w-[30%] w-[100%] flex flex-row h-[50px] sm:mt-0 mt-2">
         <button
           onClick={handlePush}
-          className="bg-slate-600 h-full text-white sm:ml-[1%] ml-0 w-[49%]"
+          className={`${searchText == searchedText ? "bg-slate-400" : "bg-slate-600"} h-full text-white sm:ml-[1%] ml-0 w-[49%]`}
         >
           Ara
         </button>

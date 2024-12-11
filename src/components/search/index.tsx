@@ -5,11 +5,12 @@ import { useCallback, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-export default function Page() {
+export default function Search() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchTextInput = useRef(null);
+  const [searchText, setSearchText] = useState("");
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -21,11 +22,11 @@ export default function Page() {
     [searchParams]
   );
 
-  const [searchText, setSearchText] = useState("");
-
   const handlePush = () => {
     if (searchText == "") {
-      router.push("/");
+      const params = new URLSearchParams(searchParams.toString());
+      const newQueryString = params.toString();
+      router.push(newQueryString ? `${pathname}?${newQueryString}` : pathname);
     } else {
       router.push(pathname + "?" + createQueryString("name", searchText));
     }
@@ -33,12 +34,17 @@ export default function Page() {
 
   const clearSearchText = () => {
     setSearchText("");
-    router.push("/");
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("name");
+    const newQueryString = params.toString();
+    router.push(newQueryString ? `${pathname}?${newQueryString}` : pathname);
+
     searchTextInput.current.focus();
   };
 
   return (
-    <div className=" w-1/2 h-[50px] flex flex-row">
+    <>
       <div className="border-2 w-[80%] h-[50px] relative">
         <input
           ref={searchTextInput}
@@ -68,6 +74,6 @@ export default function Page() {
       >
         Ara
       </button>
-    </div>
+    </>
   );
 }
